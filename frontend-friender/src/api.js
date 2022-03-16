@@ -28,17 +28,13 @@ class FrienderApi {
       }
 
 
-      static async uploadProfilePic(picFileName){
-          const res = await this.request("", {filename: picFileName}, "post");
+      static async uploadProfilePic(file){
+          const res = await this.request("", {filename: file}, "post");
           return res.data; 
       }
 
 
 
-
-
-
-
-
-
 }
+
+export default FrienderApi;
