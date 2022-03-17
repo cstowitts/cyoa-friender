@@ -1,18 +1,18 @@
-import Home from "./Home";
-import {Switch, Route} from "react-router-dom";
-import FrienderApi from "./api";
+// import Home from "./Home";
+// import {Switch, Route} from "react-router-dom";
+// import FrienderApi from "./api";
 
 
-function Routes (){
+// function Routes (){
 
 
-    return(
-        <Switch>
-            <Route path="/">
-                <Home submitAction={FrienderApi.uploadProfilePic}/>
-            </Route>
-        </Switch>
-    )
-}
+//     return(
+//         <Switch>
+//             <Route path="/">
+//                 <Home submitAction={FrienderApi.uploadProfilePic}/>
+//             </Route>
+//         </Switch>
+//     )
+// }
 
-export default Routes;
+// export default Routes;

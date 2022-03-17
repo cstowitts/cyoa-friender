@@ -53,7 +53,7 @@ const upload = multer();
     
    
 
-app.post('/', upload.single('profile-pic'), async (req, res, next) => {
+app.post('/', upload.single('file'), async (req, res, next) => {
     const fileURL = await uploadToS3Bucket(req.file);
     return res.json({status: `Image uploaded at url ${fileURL} ! Status: 200 OK`});
 });
