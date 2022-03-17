@@ -27,22 +27,25 @@ function ProfileEditForm() {
     dataArray.append("textFormData", textFormData);
     dataArray.append("fileFormData", fileFormData);
 
-    console.log("data from profile form:", dataArray.get);
-
-    await axios
+    
+    //don't need encType="multipart/form-data" bc we send it in the header of our axios request
+    //don't need await...not sure why
+    axios
       .post(`${BASE_URL}`, dataArray, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
       })
       .then((response) => {
-        console.log("Successfully uploaded form!");
+        console.log(response.data.imgUrl);
       })
       .catch((error) => {
         console.log("error", error);
       });
   }
 
+  //if we change the inl;ine change handler we can console love the input evt.target.files there
+  //not in handleSubmit bc it's not the evt target we want
 
   return (
     <form onSubmit={handleSubmit}>
@@ -53,11 +56,11 @@ function ProfileEditForm() {
         id="file"
         name="file"
         accept="image/png, image/jpeg"
-        onChange={(e) => setFileFormData(e.target.files)}
+        onChange={(e) => setFileFormData(e.target.files[0])}
       />
 
       <label htmlFor="username">
-        userName:
+        username:
       </label>
       <input
         id="username"

@@ -15,7 +15,7 @@ const multer = require('multer');
 const multerS3 = require('multer-s3');
 const pg = require('pg');
 const uuid = require('uuid').v4;
-const { uploadToS3Bucket } = require('./s3');
+const { uploadToS3Bucket } = require('./helpers/uploadToS3Bucket');
 
 //TODO: add additional routes and details after they're written
 // const {NotFoundError} = require("./ExpressError");
@@ -28,34 +28,22 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan("tiny"));
 
-
-// const {SECRET_ACCESS_KEY,
-//     ACCESS_KEY_ID,
-//     S3_BUCKET_NAME,
-//     REGION,
-// } = require('./config');
-
-
-
-// app.use(bodyParser.json());
-
-// AWS.config.update({
-//     secretAccessKey: SECRET_ACCESS_KEY,
-//     accessKeyId: ACCESS_KEY_ID,
-//     region: REGION
-// });
-
-
     
     
 const upload = multer();
-//multer enables us to pass req.file into our async fn
-    
-   
+//multer stores file data on req.file, enables us to pass req.file into our async fn
 
-app.post('/', upload.single('file'), async (req, res, next) => {
+//req.body where other info lives
+   
+//'file' has to match the key of the appended file on the frontend in the FormData instance in our handleSubmit
+app.post('/', upload.single('fileFormData'), async (req, res, next) => {
     const fileURL = await uploadToS3Bucket(req.file);
-    return res.json({status: `Image uploaded at url ${fileURL} ! Status: 200 OK`});
+//save to db for user here!
+
+    return res.json({
+        status: "Status - 200 OK",  
+        imgUrl: fileURL
+    });
 });
 
 //multipart form encoding for react to backend data sent
