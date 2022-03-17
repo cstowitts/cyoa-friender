@@ -16,6 +16,7 @@ const multerS3 = require('multer-s3');
 const pg = require('pg');
 const uuid = require('uuid').v4;
 const { uploadToS3Bucket } = require('./helpers/uploadToS3Bucket');
+const db = require("./db");
 
 //TODO: add additional routes and details after they're written
 // const {NotFoundError} = require("./ExpressError");
@@ -37,7 +38,16 @@ const upload = multer();
    
 //'file' has to match the key of the appended file on the frontend in the FormData instance in our handleSubmit
 app.post('/', upload.single('fileFormData'), async (req, res, next) => {
+    console.log("req from app:", req.body.textFormData);
     const fileURL = await uploadToS3Bucket(req.file);
+    const result = await db.query(
+        `INSERT INTO users(username, profile_pic_src)
+        VALUES ($1, $2)
+        RETURNING username, profile_pic_src`,
+        [req.body.textFormData, fileURL]
+    );
+
+    console.log("results from database:", result);
 //save to db for user here!
 
     return res.json({

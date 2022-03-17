@@ -27,8 +27,8 @@ const s3 = new S3Client({
 //TODO: DOCSTRING!
 /** */
 async function uploadToS3Bucket(file) {
-  console.log("uploadToS3Bucket file: ", file);
-  console.log("file.buffer: ", file.buffer);
+  // console.log("uploadToS3Bucket file: ", file);
+  // console.log("file.buffer: ", file.buffer);
 
   const key = uuid();
   const putObjectCommand = new PutObjectCommand({
