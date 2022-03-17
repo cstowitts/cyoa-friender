@@ -1,7 +1,7 @@
 \echo 'Delete and recreate friender db?'
 \prompt 'Return for yes or control-C to cancel > ' foo
 
-DROP DATABASE friender;
+-- DROP DATABASE friender;
 CREATE DATABASE friender;
 \connect friender
 
