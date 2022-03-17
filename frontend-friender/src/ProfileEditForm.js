@@ -29,7 +29,7 @@ function ProfileEditForm() {
 
     
     //don't need encType="multipart/form-data" bc we send it in the header of our axios request
-    //don't need await...not sure why
+    //don't need await the axios request bc we are using .then and .catch. If promise is resolved, runs .then cb. If promise is rejected, runs .catch cb.
     axios
       .post(`${BASE_URL}`, dataArray, {
         headers: {
