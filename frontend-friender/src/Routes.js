@@ -7,13 +7,13 @@ import RegisterForm from "./forms/RegisterForm";
 function Routes ({register, login}){
     return(
         <Switch>
-            <Route path="/">
+            <Route exact path="/">
                 <Home />
             </Route>
-            <Route path="/login">
+            <Route exact path="/login">
                 <LoginForm login={login} />
             </Route>
-            <Route path="/register">
+            <Route exact path="/register">
                 <RegisterForm register={register} />
             </Route>
         </Switch>
