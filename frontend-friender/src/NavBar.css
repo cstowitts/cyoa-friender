@@ -1,0 +1,28 @@
+.NavBar {
+  display: flex;
+  justify-content: space-between;
+  margin: 1em 0em;
+}
+
+.NavBar-left {
+  padding-left: 50px;
+}
+
+.NavBar-right {
+  display: flex;
+  padding-right: 50px;
+  gap: 30px;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+.active{
+  color: black;
+  font-weight: bold;
+}

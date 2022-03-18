@@ -1,5 +1,6 @@
 // import { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import "./NavBar.css";
 // import UserContext from "./userContext";
 
 /** Nav for navigation between resources
@@ -22,10 +23,10 @@ function NavBar({ logout }) {
   return (
     <>
         <nav className="NavBar">
-          <div className="Nav-left">
+          <div className="NavBar-left">
             <NavLink exact to="/">Friender</NavLink>
           </div>
-          <div className="Nav-right">
+          <div className="NavBar-right">
             <NavLink to="/login">Login</NavLink>
             <NavLink to="/signup">Signup</NavLink>
           </div>
