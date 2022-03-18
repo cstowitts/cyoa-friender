@@ -1,0 +1,18 @@
+BIG BUG!!
+
+1. After we made our frontend (app with state and funcs, routes, navbar, profile edit form), we tried to run only the frontend on our server and got 30+ error messages. Most were about some kind of webpack 5 > polyfill error. We also got an error that the axios module couldn't be resolved. 
+
+2. We noticed that even though we hadn't installed axios on the frontend but we were still able to make the axios post request to AWS upload a pic file.
+
+3. So then we decided to install axios. All other webpack errors were still there. 
+
+4. We noticed most of them referenced an issue with "crypto" and other "aws-" affiliated issues. We searched our frontend files for these and saw all of them were in our package-log.json. We figured since we weren't explicitly using the "aws-sdk/client-s3" package, we uninstalled it. 
+
+5. After this, when we ran our frontend server it couldn't build our app at all!
+
+6. We deleted our package-lock.json and package.json to try to install everything from scratch, not thinking about how with create-react-app that it does a lot of config for us under the hood. We only had dependencies with absolutely nothing else :(
+
+7. Lidan fixed this by:
+    -deleted the package.json and package-lock.json
+    -copied both files from the frontend jobly solution
+    -then she ran 'npm install web-vitals --save-dev' (without the quotes)

@@ -32,7 +32,7 @@ class FrienderApi {
   /** Get the current user. */
 
   static async getCurrentUser(username) {
-    let res = await this.request(`users/${username}`);
+    let res = await this.request(`/${username}`);
     return res.user;
   }
 
