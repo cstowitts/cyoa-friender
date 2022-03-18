@@ -1,18 +1,23 @@
 import Home from "./Home";
 import {Switch, Route} from "react-router-dom";
-import FrienderApi from "./api";
+import LoginForm from "./forms/LoginForm";
+import RegisterForm from "./forms/RegisterForm";
 
 
-function Routes (){
-
-
+function Routes ({register, login}){
     return(
         <Switch>
             <Route path="/">
-                <Home submitAction={FrienderApi.uploadProfilePic}/>
+                <Home />
+            </Route>
+            <Route path="/login">
+                <LoginForm login={login} />
+            </Route>
+            <Route path="/register">
+                <RegisterForm register={register} />
             </Route>
         </Switch>
-    )
+    );
 }
 
 export default Routes;

@@ -1,17 +1,16 @@
-import { useState } from "react";
-import FrienderApi from "./api";
+// import { useContext } from "react";
 
 /**
  * 
  */
 function Home() {
+    // const {user, token} = useContext(UserContext);
 
-
-    returns(
+    return (
         <div className="Home">
-            <h1>
+            <h1>Welcome to make friends!</h1>
         </div>
-    )
+    );
 
 }
 

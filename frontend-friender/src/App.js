@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 // import Routes from "./Routes";
-import ProfileEditForm from "./forms/ProfileEditForm";
+// import ProfileEditForm from "./forms/ProfileEditForm";
 import LoadingSpinner from "./common/LoadingSpinner";
 import UserContext from "./auth/UserContext";
-import useLocalStorage from "./hooks/useLocalStorage";
+// import useLocalStorage from "./hooks/useLocalStorage";
+import FrienderApi from "./api";
+import jwt from "jsonwebtoken";
+import NavBar from "./NavBar";
+import Routes from "./Routes";
+
 
 //TODO: update docstring
 
 
-// Key name for storing token in localStorage for "remember me" re-login
-export const TOKEN_STORAGE_ID = "jobly-token";
 
 /** Friender application.
  *
@@ -31,7 +34,7 @@ export const TOKEN_STORAGE_ID = "jobly-token";
  */
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
-  const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
+  const [token, setToken] = useState(localStorage.getItem("token"));
   const [infoLoaded, setInfoLoaded] = useState(false);
   const [goRedirect, setGoRedirect] = useState(false);
   console.debug("App",
@@ -52,8 +55,8 @@ function App() {
         try {
           let { username } = jwt.decode(token);
           // put the token on the Api class so it can use it to call the API.
-          JoblyApi.token = token;
-          let currentUser = await JoblyApi.getCurrentUser(username);
+          FrienderApi.token = token;
+          let currentUser = await FrienderApi.getCurrentUser(username);
 
           setCurrentUser(currentUser);
           setGoRedirect(false);
@@ -74,10 +77,11 @@ function App() {
   }, [token]);
 
   /** Handles site-wide logout. */
-  function logout() {
-    setCurrentUser(null);
-    setToken(null);
-  }
+  // function logout() {
+  //   setCurrentUser(null);
+  //   localStorage.removeItem("token");
+  //   setToken(null);
+  // }
 
   /** Handles site-wide signup.
    *
@@ -87,8 +91,9 @@ function App() {
    * Make sure you await this function to see if any error happens.
    */
   async function register(signupData) {
-    let token = await JoblyApi.register(signupData);
-    setToken(token);
+    let tokenData = await FrienderApi.register(signupData);
+    setToken(tokenData);
+    localStorage.setItem("token", tokenData);
     setGoRedirect(true);
   }
 
@@ -99,13 +104,14 @@ function App() {
    * Make sure you await this function to see if any error happens.
    */
   async function login(loginData) {
-    let token = await JoblyApi.login(loginData);
-    setToken(token);
+    let tokenData = await FrienderApi.login(loginData);
+    setToken(tokenData);
+    localStorage.setItem("token", tokenData);
     setGoRedirect(true);
   }
 
   // after login/signup success, redirect to /companies
-  if (goRedirect) return <Redirect push to="/" />;
+  // if (goRedirect) return <Redirect push to="/" />;
 
   if (!infoLoaded) return <LoadingSpinner />;
 
@@ -118,7 +124,7 @@ function App() {
       setCurrentUser,
     }}>
       <NavBar />
-      <Routes />
+      <Routes register={register} login={login} />
     </UserContext.Provider>
 
   );
