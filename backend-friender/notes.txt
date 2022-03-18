@@ -1,0 +1,28 @@
+// const upload = multer();
+      //multer stores file data on req.file, enables us to pass req.file into our async fn
+
+      //req.body where other info lives
+
+      //'file' has to match the key of the appended file on the frontend in the FormData instance in our handleSubmit
+
+      //multipart form encoding for react to backend data sent
+      //look into taking the uploaded file and encoded properly before handing off to axios --formData api
+
+      // app.post('/', upload.single('fileFormData'), async (req, res, next) => {
+      //   console.log("req from app:", req.body.textFormData);
+      //   const fileURL = await uploadToS3Bucket(req.file);
+      //   // const result = await db.query(
+      //   //     `INSERT INTO users(username, profile_pic_src)
+      //   //     VALUES ($1, $2)
+      //   //     RETURNING username, profile_pic_src`,
+      //   //     [req.body.textFormData, fileURL]
+      //   // );
+
+      //   console.log("results from database:", result);
+      //   //save to db for user here!
+
+      //   return res.json({
+      //     status: "Status - 200 OK",
+      //     imgUrl: fileURL
+      //   });
+      // });

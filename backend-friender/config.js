@@ -12,6 +12,7 @@ const ACCESS_KEY_ID = process.env.ACCESS_KEY_ID;
 const S3_BUCKET_NAME = process.env.S3_BUCKET_NAME;
 const REGION = process.env.REGION;
 const DB_URI = process.env.DB_URL;
+const SECRET_KEY = process.env.SECRET_KEY;
 const BCRYPT_WORK_FACTOR = 15;
 
 console.log("Friender Config:".green);
@@ -33,5 +34,6 @@ module.exports = {
     S3_BUCKET_NAME,
     REGION,
     BCRYPT_WORK_FACTOR,
-    DB_URI
+    DB_URI,
+    SECRET_KEY
 }

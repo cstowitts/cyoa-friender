@@ -1,9 +1,7 @@
 "use strict";
 
-const db = require("../db");
 const bcrypt = require("bcrypt");
 const db = require("../db");
-const bcrypt = require("bcrypt");
 const { sqlForPartialUpdate } = require("../helpers/sql");
 const {
     NotFoundError,
@@ -183,7 +181,6 @@ class User {
                       RETURNING username,
                                 first_name AS "firstName",
                                 last_name AS "lastName",
-                                email,
                                 email,
                                 hobbies,
                                 interests,
