@@ -28,7 +28,7 @@ function NavBar({ logout }) {
           </div>
           <div className="NavBar-right">
             <NavLink to="/login">Login</NavLink>
-            <NavLink to="/signup">Signup</NavLink>
+            <NavLink to="/register">Register</NavLink>
           </div>
         </nav>
         
