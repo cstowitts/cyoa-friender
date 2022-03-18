@@ -80,14 +80,7 @@ class User {
    *
    * Throws BadRequestError on duplicates.
    **/
-    static async register(
-        { 
-            username,
-            password, 
-            firstName, 
-            lastName, 
-            email, 
-        }) {
+    static async register({ username, password, firstName, lastName, email }){
         const duplicateCheck = await db.query(
             `SELECT username
                 FROM users
@@ -127,7 +120,17 @@ class User {
     //TODO: update docstring
     /** Given a username, return data about user.
    *
-   * Returns { username, first_name, last_name}
+   * Returns { 
+   *    username, 
+   *    firstName, 
+   *    lastName, 
+   *    email, 
+   *    hobbies,
+   *    interests,
+   *    location,
+   *    friend_radius,
+   *    profile_pic_src 
+   * }
    *
    * Throws NotFoundError if user not found.
    **/
@@ -228,19 +231,6 @@ class User {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
+
+module.exports = User;

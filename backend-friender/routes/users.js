@@ -7,17 +7,47 @@
 const express = require("express");
 const { ensureCorrectUser } = require("../middleware/auth");
 const { BadRequestError } = require("../expressError");
-const User = require("../models/user");
+const User = require("../models/User");
 
 // const userNewSchema = require("../schemas/userNew.json");
 // const userUpdateSchema = require("../schemas/userUpdate.json");
 
 const multer = require('multer');
-const { uploadToS3Bucket } = require('./helpers/uploadToS3Bucket');
+const { uploadToS3Bucket } = require('../helpers/uploadToS3Bucket');
 
 const router = express.Router();
 
 //TODO: update the docstring and add schema validation
+
+
+/** GET /[username] => { user }
+ *
+ * Returns: { 
+   *    username, 
+   *    firstName, 
+   *    lastName, 
+   *    email, 
+   *    hobbies,
+   *    interests,
+   *    location,
+   *    friend_radius,
+   *    profile_pic_src 
+   * }
+ * 
+ * Authorization required: same user-as-:username
+ **/
+
+router.get("/:username", ensureCorrectUser, async function (req, res, next) {
+  try {
+    const user = await User.getCurrentUser(req.params.username);
+    return res.json({ user });
+  } catch (err) {
+    return next(err);
+  }
+});
+
+
+//TODO: change docstring
 
 /** POST / { user }  => { user, token }
  *
@@ -26,7 +56,17 @@ const router = express.Router();
  * admin.
  *
  * This returns the newly created user and an authentication token for them:
- *  {user: { username, firstName, lastName, email, isAdmin }, token }
+ *  {user: { 
+   *    username, 
+   *    firstName, 
+   *    lastName, 
+   *    email, 
+   *    hobbies,
+   *    interests,
+   *    location,
+   *    friend_radius,
+   *    profile_pic_src 
+   * }, token }
  *
  * Authorization required: admin
  **/
