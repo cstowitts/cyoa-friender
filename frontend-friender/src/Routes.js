@@ -1,7 +1,8 @@
 import Home from "./Home";
-import {Switch, Route} from "react-router-dom";
+import {Switch, Route, Redirect} from "react-router-dom";
 import LoginForm from "./forms/LoginForm";
 import RegisterForm from "./forms/RegisterForm";
+import ProfileEditForm from "./forms/ProfileEditForm";
 
 
 function Routes ({register, login}){
@@ -16,6 +17,10 @@ function Routes ({register, login}){
             <Route exact path="/register">
                 <RegisterForm register={register} />
             </Route>
+            <Route exact path="/profile">
+                <ProfileEditForm  />
+            </Route>
+            <Redirect to="/" />
         </Switch>
     );
 }
