@@ -1,37 +1,19 @@
-// /**
-//  * 
-//  */
-// import {useState} from "react";
-// import FrienderApi from "./api";
+import { useState } from "react";
+import FrienderApi from "./api";
+
+/**
+ * 
+ */
+function Home() {
 
 
-// function Home(submitAction){
-//    const [file, setFile] = useState(null);
+    returns(
+        <div className="Home">
+            <h1>
+        </div>
+    )
 
-//    async function handleSubmit(evt) {
-//        evt.preventDefault();
-//        await FrienderApi.uploadProfilePic(file);
-
-//    }
-    
-
-//     return (
-//         <form onSubmit={handleSubmit}>
-//             <label htmlFor="profile-pic">
-//                 Choose your profile picture!
-//             </label>
-//             <input type="file"
-//                     id="profile-pic" 
-//                     name="profile-pic"
-//                     accept="image/png, image/jpeg" />
-
-//             <button>
-//                 Upload Image
-//             </button>
-//         </form>
-//     )
-
-// }
+}
 
 
-// export default Home;
+export default Home;

@@ -2,13 +2,13 @@
 
 /** Routes for users. */
 
-const jsonschema = require("jsonschema");
+// const jsonschema = require("jsonschema");
 
 const express = require("express");
 const { ensureCorrectUser } = require("../middleware/auth");
 const { BadRequestError } = require("../expressError");
 const User = require("../models/user");
-const { createToken } = require("../helpers/tokens");
+
 // const userNewSchema = require("../schemas/userNew.json");
 // const userUpdateSchema = require("../schemas/userUpdate.json");
 
@@ -31,6 +31,7 @@ const router = express.Router();
  * Authorization required: admin
  **/
 const upload = multer();
+
 router.patch("/:username/profile", ensureCorrectUser, upload.single('fileFormData'),
   async function (req, res, next) {
     try {
