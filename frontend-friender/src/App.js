@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-// import { Redirect } from "react-router-dom";
-// import Routes from "./Routes";
+import { Redirect } from "react-router-dom";
 // import ProfileEditForm from "./forms/ProfileEditForm";
 import LoadingSpinner from "./common/LoadingSpinner";
 import UserContext from "./auth/UserContext";
-// import useLocalStorage from "./hooks/useLocalStorage";
 import FrienderApi from "./api";
 import jwt from "jsonwebtoken";
 import NavBar from "./NavBar";
@@ -56,8 +54,9 @@ function App() {
           let { username } = jwt.decode(token);
           // put the token on the Api class so it can use it to call the API.
           FrienderApi.token = token;
+          console.log("App getCurrentUser token: ", token, "username: ", username);
           let currentUser = await FrienderApi.getCurrentUser(username);
-
+          
           setCurrentUser(currentUser);
           setGoRedirect(false);
 
@@ -77,11 +76,11 @@ function App() {
   }, [token]);
 
   /** Handles site-wide logout. */
-  // function logout() {
-  //   setCurrentUser(null);
-  //   localStorage.removeItem("token");
-  //   setToken(null);
-  // }
+  function logout() {
+    setCurrentUser(null);
+    localStorage.removeItem("token");
+    setToken(null);
+  }
 
   /** Handles site-wide signup.
    *
@@ -105,13 +104,15 @@ function App() {
    */
   async function login(loginData) {
     let tokenData = await FrienderApi.login(loginData);
+    console.log("inside login func, tokenData: ", tokenData);
     setToken(tokenData);
+    console.log("inside login func, token state: ", token);
     localStorage.setItem("token", tokenData);
     setGoRedirect(true);
   }
 
-  // after login/signup success, redirect to /companies
-  // if (goRedirect) return <Redirect push to="/" />;
+  // after login/signup success, redirect to /
+  if (goRedirect) return <Redirect push to="/" />;
 
   if (!infoLoaded) return <LoadingSpinner />;
 
@@ -122,8 +123,9 @@ function App() {
     value={{
       currentUser,
       setCurrentUser,
+      token,
     }}>
-      <NavBar />
+      <NavBar logout={logout} />
       <Routes register={register} login={login} />
     </UserContext.Provider>
 

@@ -18,8 +18,9 @@ import UserContext from "./auth/UserContext";
  */
 //TODO: docstring for whenever you're using useContext
 function NavBar({ logout }) {
-  const { user, token } = useContext(UserContext);
-  console.log("user from nav", user);
+  const { currentUser, token } = useContext(UserContext);
+  console.log("user from nav", currentUser);
+  console.log("token from nav", token);
 
   return (
     <>
@@ -40,8 +41,8 @@ function NavBar({ logout }) {
             <NavLink exact to="/">Friender</NavLink>
           </div>
           <div className="NavBar-right">
-            <NavLink to="/profile">ProfileEditForm</NavLink>
-            <button onClick={logout}>Logout {user.username}</button>
+            <NavLink to="/profile">Edit your profile</NavLink>
+            <button onClick={logout}>Logout {currentUser.username}</button>
           </div>
         </nav>
       }

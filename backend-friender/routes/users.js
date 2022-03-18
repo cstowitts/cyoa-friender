@@ -74,8 +74,11 @@ const upload = multer();
 
 router.patch("/:username/profile", ensureCorrectUser, upload.single('fileFormData'),
   async function (req, res, next) {
+    console.log("patch route, req.file: ", req.file);
+    console.log("patch route, req.body.textFormData: ", req.body.textFormData);
     try {
       const fileURL = await uploadToS3Bucket(req.file);
+      console.log("inside patch, fileURL: ", fileURL);
       const {
         firstName,
         lastName,
@@ -96,6 +99,8 @@ router.patch("/:username/profile", ensureCorrectUser, upload.single('fileFormDat
         friendRadius,
         profilePicSrc: fileURL
       }
+      console.log("inside patch, data: ", data);
+
 
       const user = await User.update(req.params.username, data);
       return res.json({ user });

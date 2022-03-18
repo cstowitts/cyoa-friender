@@ -1,7 +1,6 @@
 "use strict";
 
 const express = require('express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const dotenv = require('dotenv');
 // const jsonSchema = require('jsonschema');
@@ -21,6 +20,7 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan("tiny"));
 app.use(authenticateJWT);
+
 
 app.use("/auth", authRoutes);
 app.use("/users", usersRoutes);
