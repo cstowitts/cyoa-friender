@@ -1,7 +1,7 @@
-// import { useContext } from "react";
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import "./NavBar.css";
-// import UserContext from "./userContext";
+import UserContext from "./userContext";
 
 /** Nav for navigation between resources
  * 
@@ -17,8 +17,8 @@ import "./NavBar.css";
  */
 //TODO: docstring for whenever you're using useContext
 function NavBar({ logout }) {
-  // const {user, token} = useContext(UserContext);
-  // console.log("user from nav", user);
+  const {user, token} = useContext(UserContext);
+  console.log("user from nav", user);
 
   return (
     <>
